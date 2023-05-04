@@ -11,9 +11,15 @@ List<Products> productList = [
   Products(name: "IPhone 14 Pro Max - 512 GB", price: 3450, code: 8774),
 ];
 
+late String productName;
+late int productPrice;
+late String userName;
+
+RegExp charAzDetector = new RegExp(r'[^0-9]');
+
 void main() {
-  print("Qonaq girishi uchun [1] daxil edin.\n"
-      "Movcud hesabiniz varsa [2] daxil edin.");
+  print("Qonaq girishi uchun [1] daxil edin.");
+  print("Movcud hesabiniz varsa [2] daxil edin.");
   loginType();
 }
 
@@ -80,29 +86,29 @@ void firstContinue() {
 
 void userNameCheck() {
   print("Istifadeci adinizi daxil edin");
-  String userName = stdin.readLineSync().toString().toUpperCase();
+  userName = stdin.readLineSync().toString().toUpperCase();
   if (userName.isEmpty || userName.contains(" ")) {
     print("Istifadechi adi bosh ola bilmez");
     userNameCheck();
   } else {
-    userPassCheck(userName);
+    userPassCheck();
   }
 }
 
-void userPassCheck(userName) {
+void userPassCheck() {
   print("Shifrenizi daxil edin");
   String userPass = stdin.readLineSync().toString();
   if (userPass.isEmpty || userPass.contains(" ")) {
     print("Shifre bosh ola bilmez");
-    userPassCheck(userName);
+    userPassCheck();
   } else {
     print(" " * 10);
-    userNameMethod(userName);
+    userNameMethod();
     userModPanel();
   }
 }
 
-void userNameMethod(userName) {
+void userNameMethod() {
   print("Hormetli $userName xosh geldiniz");
 }
 
@@ -133,43 +139,60 @@ void userModPanel() {
 
 void productChoiceInput() {
   int productChoice = int.parse(stdin.readLineSync().toString());
-  print(" " * 10);
-  productChoicePanel(productChoice);
-}
 
-void productChoicePanel(productChoice) {
-  if (productChoice == 7852 ||
-      productChoice == 5336 ||
-      productChoice == 9252 ||
-      productChoice == 2498 ||
-      productChoice == 6297 ||
-      productChoice == 8774) {
-    for (int i = 0; i < productList.length; i++) {
-      if (productChoice == productList[i].code) {
-        print("Sizin sechdiyiniz mehsul: ${productList[i].name}");
-        print("Mehsulun nagd alishda qiymeti ${productList[i].price} Manatdir");
-        print(" " * 10);
-        print("Alisverisi tamamlamaq uhun [1] daxil edin");
-        print("Mehsul sechimine davam etmek uhun [2] daxil edin");
-        print("Cixis etmek uhun [3] daxil edin");
-        int seconddContinue = int.parse(stdin.readLineSync().toString());
-        switch (seconddContinue) {
-          case 1:
-            cashOrCard();
-            break;
-          case 2:
-            userModPanel();
-            break;
-          case 3:
-            print("Bizi sechdiyiniz ucun teshekkurler");
-            break;
-          default:
-            print("Lutfen duzgun sechim edin");
-        }
-      }
-    }
+  if (productChoice - productList[0].code == 0) {
+    productName = productList[0].name;
+    productPrice = productList[0].price;
+  } else if (productChoice - productList[1].code == 0) {
+    productName = productList[1].name;
+    productPrice = productList[1].price;
+  } else if (productChoice - productList[2].code == 0) {
+    productName = productList[2].name;
+    productPrice = productList[2].price;
+  } else if (productChoice - productList[3].code == 0) {
+    productName = productList[3].name;
+    productPrice = productList[3].price;
+  } else if (productChoice - productList[4].code == 0) {
+    productName = productList[4].name;
+    productPrice = productList[4].price;
+  } else if (productChoice - productList[5].code == 0) {
+    productName = productList[5].name;
+    productPrice = productList[5].price;
   } else {
     productChoiceError();
+  }
+  print(" " * 10);
+  productChoicePanel();
+}
+
+void productChoicePanel() {
+  print("Hormetli $userName");
+  print("Sizin sechdiyiniz mehsul: $productName");
+  print("Mehsulun nagd alishda qiymeti $productPrice Manatdir");
+  print(" " * 10);
+  print("Alisverisi tamamlamaq uhun [1] daxil edin");
+  print("Mehsul sechimine davam etmek uhun [2] daxil edin");
+  print("Cixis etmek uhun [3] daxil edin");
+  secondContinue();
+}
+
+void secondContinue() {
+  int seconddContinueInput = int.parse(stdin.readLineSync().toString());
+  switch (seconddContinueInput) {
+    case 1:
+      cashOrCard();
+      break;
+    case 2:
+      userModPanel();
+      break;
+    case 3:
+      print(" " * 10);
+      print("Bizi sechdiyiniz ucun teshekkurler");
+      break;
+    default:
+      print(" " * 10);
+      print("Lutfen duzgun sechim edin");
+      secondContinue();
   }
 }
 
@@ -232,34 +255,13 @@ void cardPaymentInput() {
 
 void directlyPay() {
   print(" " * 10);
-  print("Kartin uzerindeki 16 reqemli kodu daxil edin");
+  print("Odenishi tamamlamaq uchun Kartin 16 reqemli kodunu daxil edin");
   cardNumber();
 }
 
 void cardNumber() {
   String cardNumberr = stdin.readLineSync().toString();
-  if (cardNumberr.length != 16 ||
-      cardNumberr.length != 16 ||
-      cardNumberr.contains("a") ||
-      cardNumberr.contains("b") ||
-      cardNumberr.contains("c") ||
-      cardNumberr.contains("d") ||
-      cardNumberr.contains("e") ||
-      cardNumberr.contains("f") ||
-      cardNumberr.contains("g") ||
-      cardNumberr.contains("h") ||
-      cardNumberr.contains("j") ||
-      cardNumberr.contains("k") ||
-      cardNumberr.contains("l") ||
-      cardNumberr.contains("p") ||
-      cardNumberr.contains("t") ||
-      cardNumberr.contains("r") ||
-      cardNumberr.contains("n") ||
-      cardNumberr.contains("z") ||
-      cardNumberr.contains("v") ||
-      cardNumberr.contains("d") ||
-      cardNumberr.contains("l") ||
-      cardNumberr.contains("q")) {
+  if (cardNumberr.length != 16 || cardNumberr.contains(charAzDetector)) {
     print(" " * 10);
     print("Lutfen kart nomresini duzgun qeyd edin");
     cardNumber();
@@ -273,30 +275,13 @@ void cardNumber() {
 
 void cardexpiryDateMonth() {
   String expiryDateMonthh = stdin.readLineSync().toString();
-  int expiryDateMonthhh = int.parse(expiryDateMonthh);
+  int expiryDateMonthhh =
+      int.parse(expiryDateMonthh.replaceAll(RegExp(r'[^0-9]'), '0'));
 
   if (expiryDateMonthh.length != 2 ||
-      expiryDateMonthh.contains("a") ||
-      expiryDateMonthh.contains("b") ||
-      expiryDateMonthh.contains("c") ||
-      expiryDateMonthh.contains("d") ||
-      expiryDateMonthh.contains("e") ||
-      expiryDateMonthh.contains("f") ||
-      expiryDateMonthh.contains("g") ||
-      expiryDateMonthh.contains("h") ||
-      expiryDateMonthh.contains("j") ||
-      expiryDateMonthh.contains("k") ||
-      expiryDateMonthh.contains("l") ||
-      expiryDateMonthh.contains("p") ||
-      expiryDateMonthh.contains("t") ||
-      expiryDateMonthh.contains("r") ||
-      expiryDateMonthh.contains("n") ||
-      expiryDateMonthh.contains("z") ||
-      expiryDateMonthh.contains("v") ||
-      expiryDateMonthh.contains("d") ||
-      expiryDateMonthh.contains("l") ||
-      expiryDateMonthh.contains("q") ||
-      expiryDateMonthhh > 12) {
+      expiryDateMonthhh > 12 ||
+      expiryDateMonthhh < 1 ||
+      expiryDateMonthh.contains(charAzDetector)) {
     print(" " * 10);
     print("Lutfen ayi duzgun qeyd edin (mes: Yanvar - 01)");
     cardexpiryDateMonth();
@@ -309,30 +294,12 @@ void cardexpiryDateMonth() {
 
 void cardExpiryDateYear() {
   String expiryDateYear = stdin.readLineSync().toString();
-  int expiryDateYearr = int.parse(expiryDateYear);
+  int expiryDateYearr =
+      int.parse(expiryDateYear.replaceAll(RegExp(r'[^0-9]'), '0'));
   if (expiryDateYear.length != 4 ||
       expiryDateYearr > 2029 ||
       expiryDateYearr < 2017 ||
-      expiryDateYear.contains("a") ||
-      expiryDateYear.contains("b") ||
-      expiryDateYear.contains("c") ||
-      expiryDateYear.contains("d") ||
-      expiryDateYear.contains("e") ||
-      expiryDateYear.contains("f") ||
-      expiryDateYear.contains("g") ||
-      expiryDateYear.contains("h") ||
-      expiryDateYear.contains("j") ||
-      expiryDateYear.contains("k") ||
-      expiryDateYear.contains("l") ||
-      expiryDateYear.contains("p") ||
-      expiryDateYear.contains("t") ||
-      expiryDateYear.contains("r") ||
-      expiryDateYear.contains("n") ||
-      expiryDateYear.contains("z") ||
-      expiryDateYear.contains("v") ||
-      expiryDateYear.contains("d") ||
-      expiryDateYear.contains("l") ||
-      expiryDateYear.contains("q")) {
+      expiryDateYear.contains(charAzDetector)) {
     print(" " * 10);
     print("Lutfen ili duzgun qeyd edin (mes: 2024)");
     cardExpiryDateYear();
@@ -345,30 +312,12 @@ void cardExpiryDateYear() {
 
 void cardCvc() {
   String cardCvcInput = stdin.readLineSync().toString();
-  int cardCvcInputt = int.parse(cardCvcInput);
+  int cardCvcInputt =
+      int.parse(cardCvcInput.replaceAll(RegExp(r'[^0-9]'), '0'));
   if (cardCvcInput.length != 3 ||
       cardCvcInputt > 999 ||
       cardCvcInputt < 001 ||
-      cardCvcInput.contains("a") ||
-      cardCvcInput.contains("b") ||
-      cardCvcInput.contains("c") ||
-      cardCvcInput.contains("d") ||
-      cardCvcInput.contains("e") ||
-      cardCvcInput.contains("f") ||
-      cardCvcInput.contains("g") ||
-      cardCvcInput.contains("h") ||
-      cardCvcInput.contains("j") ||
-      cardCvcInput.contains("k") ||
-      cardCvcInput.contains("l") ||
-      cardCvcInput.contains("p") ||
-      cardCvcInput.contains("t") ||
-      cardCvcInput.contains("r") ||
-      cardCvcInput.contains("n") ||
-      cardCvcInput.contains("z") ||
-      cardCvcInput.contains("v") ||
-      cardCvcInput.contains("d") ||
-      cardCvcInput.contains("l") ||
-      cardCvcInput.contains("q")) {
+      cardCvcInput.contains(charAzDetector)) {
     print(" " * 10);
     print("Lutfen tehlukesizlik (CVC) kodunu duzgun daxil edin (mes: 376)");
     cardCvc();
@@ -412,19 +361,99 @@ void birKart() {
   print(" " * 10);
   print("Birkart ile 3, 6 ,12 , 18 və 24 ayliq odenish var");
   print("Qiymet ise stabil qalır.");
+  print("Neche ayliq hisselere bolek?");
+  birKartChoice();
+}
+
+void birKartChoice() {
+  int birKartChoicee = int.parse(stdin.readLineSync().toString());
+  if (birKartChoicee == 3 ||
+      birKartChoicee == 6 ||
+      birKartChoicee == 12 ||
+      birKartChoicee == 18 ||
+      birKartChoicee == 24) {
+    print(" " * 10);
+    print("$birKartChoicee ayliq hisselere bolunecek.");
+    print(
+        "Ayliq odenish: ${(productPrice / birKartChoicee).toStringAsFixed(2)} Azn olacaq.");
+    print("Toplam odeyeceyiniz mebleg: $productPrice Azn olacaq.");
+    directlyPay();
+  } else {
+    print(" " * 10);
+    print("Lutfen duzgun sechim edim!");
+    birKartChoice();
+  }
 }
 
 void tamKart() {
   print(" " * 10);
   print("Tamkart ile 3, 6 və 12 ayliq odenish var.");
   print("12 aylıq sechildikde  mehsulun qiymetinin üzerine 25% elave olunur.");
+  print("Neche ayliq hisselere bolek?");
+  tamKartChoice();
+}
+
+void tamKartChoice() {
+  int tamKartChoicee = int.parse(stdin.readLineSync().toString());
+  if (tamKartChoicee == 3 || tamKartChoicee == 6) {
+    print(" " * 10);
+    print("$tamKartChoicee ayliq hisselere bolunecek.");
+
+    print(
+        "Ayliq odenish: ${(productPrice / tamKartChoicee).toStringAsFixed(2)} Azn olacaq.");
+    print("Toplam odeyeceyiniz mebleg: $productPrice Azn olacaq.");
+    directlyPay();
+  } else if (tamKartChoicee == 12) {
+    double tamKartNewPrice = productPrice + (productPrice * 25 / 100);
+    print(" " * 10);
+    print("$tamKartChoicee ayliq hisselere bolunecek.");
+
+    print(
+        "Ayliq odenish: ${(tamKartNewPrice / tamKartChoicee).toStringAsFixed(2)} Azn olacaq.");
+    print("Toplam odeyeceyiniz mebleg: $tamKartNewPrice Azn olacaq.");
+    directlyPay();
+  } else {
+    print(" " * 10);
+    print("Lutfen duzgun sechim edim!");
+    tamKartChoice();
+  }
 }
 
 void bolKart() {
   print(" " * 10);
   print("Bolkart ile  3 və 6 ayliq odenishler var.");
   print("6 ayliq sechildikde her ay uchun 10 azn elave olunur.");
+  print("Neche ayliq hisselere bolek?");
+  bolKartChoice();
 }
+
+void bolKartChoice(){
+  int bolKartChoicee = int.parse(stdin.readLineSync().toString());
+  if (bolKartChoicee == 3) {
+    print(" " * 10);
+    print("$bolKartChoicee ayliq hisselere bolunecek.");
+
+    print(
+        "Ayliq odenish: ${(productPrice / bolKartChoicee).toStringAsFixed(2)} Azn olacaq.");
+    print("Toplam odeyeceyiniz mebleg: $productPrice Azn olacaq.");
+    directlyPay();
+  } else if (bolKartChoicee == 6) {
+    double bolKartNewPrice = productPrice + 60;
+    print(" " * 10);
+    print("$bolKartChoicee ayliq hisselere bolunecek.");
+
+    print(
+        "Ayliq odenish: ${(bolKartNewPrice / bolKartChoicee).toStringAsFixed(2)} Azn olacaq.");
+    print("Toplam odeyeceyiniz mebleg: $bolKartNewPrice Azn olacaq.");
+    directlyPay();
+  } else {
+    print(" " * 10);
+    print("Lutfen duzgun sechim edim!");
+    bolKartChoice();
+  }
+}
+
+
 
 void bringOrDeliveryInput() {
   int bringOrDeliveryInputt = int.parse(stdin.readLineSync().toString());
@@ -433,6 +462,7 @@ void bringOrDeliveryInput() {
       print(" " * 10);
       print(
           "Diqqet catdirilma zamani mehsulun qiymetine 10 Azn elave olunacaqdir.");
+      print("Toplam odeyeceyiniz mebleg ${productPrice + 10} Azn'dir.");
       deliveryMethod();
       break;
     case 2:
@@ -462,8 +492,8 @@ void deliveryInput() {
   } else {
     int randomday = Random().nextInt(4) + 1;
     print(" " * 10);
-    print(
-        "Sechdiyiniz mehsul $randomday ish gunu erzinde qeyd etdiyiniz unvana catdirilacaqdir.");
+    print("Sechdiyiniz mehsul: $productName");
+    print("Texmini chatdirilma muddeti: [$randomday] ish gunu");
     print("Bizi sechdiyiniz ucun teshekkurler.");
     print(" " * 10);
   }
