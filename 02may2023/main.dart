@@ -25,8 +25,7 @@ void main() {
 
 //Login Type method
 void loginType() {
-  String loginChoice = stdin.readLineSync().toString();
-  int loginChoicee = int.parse(loginChoice.replaceAll(RegExp(r'[^0-9]'), '0'));
+  int loginChoice = int.parse(stdin.readLineSync().toString());
   if (loginChoice == 1) {
     guestMod();
   } else if (loginChoice == 2) {
@@ -428,7 +427,7 @@ void bolKart() {
   bolKartChoice();
 }
 
-void bolKartChoice() {
+void bolKartChoice(){
   int bolKartChoicee = int.parse(stdin.readLineSync().toString());
   if (bolKartChoicee == 3) {
     print(" " * 10);
@@ -453,6 +452,8 @@ void bolKartChoice() {
     bolKartChoice();
   }
 }
+
+
 
 void bringOrDeliveryInput() {
   int bringOrDeliveryInputt = int.parse(stdin.readLineSync().toString());
