@@ -11,8 +11,7 @@ List<Products> productList = [
   Products(name: "IPhone 14 Pro Max - 512 GB", price: 3450, code: 8774),
 ];
 
-late String productName;
-late int productPrice;
+int selectedProduct = -1;
 late String userName;
 
 RegExp charAzDetector = new RegExp(r'[^0-9]');
@@ -25,14 +24,18 @@ void main() {
 
 //Login Type method
 void loginType() {
-  int loginChoice = int.parse(stdin.readLineSync().toString());
-  if (loginChoice == 1) {
-    guestMod();
-  } else if (loginChoice == 2) {
-    userNameCheck();
-  } else {
-    print("Lutfen duzgun sechim edin");
-    loginType();
+  String loginChoice = stdin.readLineSync().toString();
+  int? loginChoicee = int.tryParse(loginChoice);
+  switch (loginChoicee) {
+    case 1:
+      guestMod();
+      break;
+    case 2:
+      userNameCheck();
+      break;
+    default:
+      print("Lutfen duzgun sechim edin");
+      loginType();
   }
 }
 
@@ -46,6 +49,7 @@ void guestMod() {
   print(" " * 10);
   print("Telefonun Modeli               Qiymeti (Azn)     Bar Kodu");
   print("---------------------------------------------------------");
+
   for (int i = 0; i < productList.length; i++) {
     if (productList[i].name.length < 26) {
       productList[i].name =
@@ -140,35 +144,27 @@ void userModPanel() {
 void productChoiceInput() {
   int productChoice = int.parse(stdin.readLineSync().toString());
 
-  if (productChoice - productList[0].code == 0) {
-    productName = productList[0].name;
-    productPrice = productList[0].price;
-  } else if (productChoice - productList[1].code == 0) {
-    productName = productList[1].name;
-    productPrice = productList[1].price;
-  } else if (productChoice - productList[2].code == 0) {
-    productName = productList[2].name;
-    productPrice = productList[2].price;
-  } else if (productChoice - productList[3].code == 0) {
-    productName = productList[3].name;
-    productPrice = productList[3].price;
-  } else if (productChoice - productList[4].code == 0) {
-    productName = productList[4].name;
-    productPrice = productList[4].price;
-  } else if (productChoice - productList[5].code == 0) {
-    productName = productList[5].name;
-    productPrice = productList[5].price;
-  } else {
-    productChoiceError();
+  for (int i = 0; i < productList.length; i++) {
+    print('${productList[i].code} =? $productChoice');
+    if (productList[i].code == productChoice) {
+      //productName = productList[i].name;
+      //productPrice = productList[i].price;
+      selectedProduct = i;
+      break;
+    }
   }
+  print('=====================$selectedProduct');
+  //  productChoiceError();
+
   print(" " * 10);
   productChoicePanel();
 }
 
 void productChoicePanel() {
   print("Hormetli $userName");
-  print("Sizin sechdiyiniz mehsul: $productName");
-  print("Mehsulun nagd alishda qiymeti $productPrice Manatdir");
+  print("Sizin sechdiyiniz mehsul: ${productList[selectedProduct].name}");
+  print(
+      "Mehsulun nagd alishda qiymeti ${productList[selectedProduct].price} Manatdir");
   print(" " * 10);
   print("Alisverisi tamamlamaq uhun [1] daxil edin");
   print("Mehsul sechimine davam etmek uhun [2] daxil edin");
@@ -375,8 +371,9 @@ void birKartChoice() {
     print(" " * 10);
     print("$birKartChoicee ayliq hisselere bolunecek.");
     print(
-        "Ayliq odenish: ${(productPrice / birKartChoicee).toStringAsFixed(2)} Azn olacaq.");
-    print("Toplam odeyeceyiniz mebleg: $productPrice Azn olacaq.");
+        "Ayliq odenish: ${(productList[selectedProduct].price / birKartChoicee).toStringAsFixed(2)} Azn olacaq.");
+    print(
+        "Toplam odeyeceyiniz mebleg: ${productList[selectedProduct].price} Azn olacaq.");
     directlyPay();
   } else {
     print(" " * 10);
@@ -400,11 +397,13 @@ void tamKartChoice() {
     print("$tamKartChoicee ayliq hisselere bolunecek.");
 
     print(
-        "Ayliq odenish: ${(productPrice / tamKartChoicee).toStringAsFixed(2)} Azn olacaq.");
-    print("Toplam odeyeceyiniz mebleg: $productPrice Azn olacaq.");
+        "Ayliq odenish: ${(productList[selectedProduct].price / tamKartChoicee).toStringAsFixed(2)} Azn olacaq.");
+    print(
+        "Toplam odeyeceyiniz mebleg: ${productList[selectedProduct].price} Azn olacaq.");
     directlyPay();
   } else if (tamKartChoicee == 12) {
-    double tamKartNewPrice = productPrice + (productPrice * 25 / 100);
+    double tamKartNewPrice = productList[selectedProduct].price +
+        (productList[selectedProduct].price * 25 / 100);
     print(" " * 10);
     print("$tamKartChoicee ayliq hisselere bolunecek.");
 
@@ -427,18 +426,19 @@ void bolKart() {
   bolKartChoice();
 }
 
-void bolKartChoice(){
+void bolKartChoice() {
   int bolKartChoicee = int.parse(stdin.readLineSync().toString());
   if (bolKartChoicee == 3) {
     print(" " * 10);
     print("$bolKartChoicee ayliq hisselere bolunecek.");
 
     print(
-        "Ayliq odenish: ${(productPrice / bolKartChoicee).toStringAsFixed(2)} Azn olacaq.");
-    print("Toplam odeyeceyiniz mebleg: $productPrice Azn olacaq.");
+        "Ayliq odenish: ${(productList[selectedProduct].price / bolKartChoicee).toStringAsFixed(2)} Azn olacaq.");
+    print(
+        "Toplam odeyeceyiniz mebleg: ${productList[selectedProduct].price} Azn olacaq.");
     directlyPay();
   } else if (bolKartChoicee == 6) {
-    double bolKartNewPrice = productPrice + 60;
+    double bolKartNewPrice = productList[selectedProduct].price + 60;
     print(" " * 10);
     print("$bolKartChoicee ayliq hisselere bolunecek.");
 
@@ -453,8 +453,6 @@ void bolKartChoice(){
   }
 }
 
-
-
 void bringOrDeliveryInput() {
   int bringOrDeliveryInputt = int.parse(stdin.readLineSync().toString());
   switch (bringOrDeliveryInputt) {
@@ -462,7 +460,8 @@ void bringOrDeliveryInput() {
       print(" " * 10);
       print(
           "Diqqet catdirilma zamani mehsulun qiymetine 10 Azn elave olunacaqdir.");
-      print("Toplam odeyeceyiniz mebleg ${productPrice + 10} Azn'dir.");
+      print(
+          "Toplam odeyeceyiniz mebleg ${productList[selectedProduct].price + 10} Azn'dir.");
       deliveryMethod();
       break;
     case 2:
@@ -492,7 +491,7 @@ void deliveryInput() {
   } else {
     int randomday = Random().nextInt(4) + 1;
     print(" " * 10);
-    print("Sechdiyiniz mehsul: $productName");
+    print("Sechdiyiniz mehsul: ${productList[selectedProduct].name}");
     print("Texmini chatdirilma muddeti: [$randomday] ish gunu");
     print("Bizi sechdiyiniz ucun teshekkurler.");
     print(" " * 10);

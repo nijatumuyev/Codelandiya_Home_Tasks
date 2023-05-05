@@ -6,6 +6,31 @@ class Products {
 }
 
 
+
+// void loginType() {
+//   int loginChoice = int.parse(
+//       stdin.readLineSync().toString().replaceAll(RegExp(r'[^0-9]'), '0'));
+//   if (loginChoice.toString().contains(charAzDetector) ||
+//       loginChoice == 1 ||
+//       loginChoice == 2) {
+//     switch (loginChoice) {
+//       case 1:
+//         guestMod();
+//         break;
+//       case 2:
+//         userNameCheck();
+//         break;
+//       default:
+//         print("Lutfen duzgun sechim edin");
+//         loginType();
+//     }
+//   } else {
+//     print("Lutfen duzgun sechim edin");
+//     loginType();
+//   }
+// }
+
+
 // void adminPage(){
 //   late String namee;
 //   late int pricee;
