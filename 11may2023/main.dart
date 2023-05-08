@@ -18,7 +18,7 @@ void main() {
   for (int i = 10; i < 100; i++) {
     numList.add(numGen[i]);
   }
-  numList.shuffle;
+  numList.shuffle();
   print(" " * 10);
   print("Hansi seviyyede shifre duzeldilsin?");
   print(" " * 10);
