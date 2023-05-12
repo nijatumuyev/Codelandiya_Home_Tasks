@@ -72,36 +72,36 @@ void selection() {
 
 void easypassListCreate() {
   passList = [];
-  passList.add(alphabet[Random().nextInt(52)]);
-  passList.add(numList[Random().nextInt(89)].toString());
-  passList.add(alphabet[Random().nextInt(52)]);
-  passList.add(numList[Random().nextInt(89)].toString());
-  passList.add(alphabet[Random().nextInt(52)]);
+  passList.add(alphabet[Random().nextInt(51)]);
+  passList.add(numList[Random().nextInt(88)].toString());
+  passList.add(alphabet[Random().nextInt(51)]);
+  passList.add(numList[Random().nextInt(88)].toString());
+  passList.add(alphabet[Random().nextInt(51)]);
   passList.shuffle();
 }
 
 void mediumpassListCreate() {
   passList = [];
-  passList.add(alphabet[Random().nextInt(52)]);
-  passList.add(numList[Random().nextInt(89)].toString());
-  passList.add(alphabet[Random().nextInt(52)]);
-  passList.add(numList[Random().nextInt(89)].toString());
-  passList.add(alphabet[Random().nextInt(52)]);
-  passList.add(numList[Random().nextInt(89)].toString());
-  passList.add(alphabet[Random().nextInt(52)]);
+  passList.add(alphabet[Random().nextInt(51)]);
+  passList.add(numList[Random().nextInt(88)].toString());
+  passList.add(alphabet[Random().nextInt(51)]);
+  passList.add(numList[Random().nextInt(88)].toString());
+  passList.add(alphabet[Random().nextInt(51)]);
+  passList.add(numList[Random().nextInt(88)].toString());
+  passList.add(alphabet[Random().nextInt(51)]);
   passList.shuffle();
 }
 
 void hardpassListCreate() {
   passList = [];
-  passList.add(alphabet[Random().nextInt(52)]);
-  passList.add(numList[Random().nextInt(89)].toString());
-  passList.add(alphabet[Random().nextInt(52)]);
-  passList.add(numList[Random().nextInt(89)].toString());
-  passList.add(alphabet[Random().nextInt(52)]);
-  passList.add(numList[Random().nextInt(89)].toString());
-  passList.add(alphabet[Random().nextInt(52)]);
-  passList.add(alphabet[Random().nextInt(52)]);
-  passList.add(numList[Random().nextInt(89)].toString());
+  passList.add(alphabet[Random().nextInt(51)]);
+  passList.add(numList[Random().nextInt(88)].toString());
+  passList.add(alphabet[Random().nextInt(51)]);
+  passList.add(numList[Random().nextInt(88)].toString());
+  passList.add(alphabet[Random().nextInt(51)]);
+  passList.add(numList[Random().nextInt(88)].toString());
+  passList.add(alphabet[Random().nextInt(51)]);
+  passList.add(alphabet[Random().nextInt(51)]);
+  passList.add(numList[Random().nextInt(88)].toString());
   passList.shuffle();
 }
