@@ -1,10 +1,3 @@
-import 'products.dart';
-import 'main.dart';
-import 'users.dart';
-
-
-
-
 class Admins {
   String adminName = "";
   String adminSurname = "";
@@ -33,4 +26,3 @@ List<Admins> adminList = [
       adminBirthMonth: 10,
       adminBirthYear: 1994)
 ];
-

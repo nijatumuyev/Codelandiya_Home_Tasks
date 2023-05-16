@@ -1,8 +1,4 @@
 import 'main.dart';
-import 'users.dart';
-import 'admins.dart';
-import 'user_panel.dart';
-import 'guest_mod.dart';
 
 class Products {
   String name = "";

@@ -1,18 +1,19 @@
 import 'dart:io';
-import 'products.dart';
 import 'main.dart';
 import 'admins.dart';
 import 'user_panel.dart';
-import 'registration.dart';
+
+int logIn = -1;
+int admLogIn = -1;
 
 class Users {
   String name = "";
   String surname = "";
   String username = "";
   String userpass = "";
-  int userBirthDay = 0;
-  int userBirthMonth = 0;
-  int userBirthYear = 0;
+  int? userBirthDay = 0;
+  int? userBirthMonth = 0;
+  int? userBirthYear = 0;
   Users(
       {required this.name,
       required this.surname,
@@ -23,8 +24,6 @@ class Users {
       required this.userBirthYear});
 }
 
-int loggedIndex = -1;
-int loggedAdminIndex = -1;
 List<Users> userList = [
   Users(
       name: "Codelandiya",
@@ -35,14 +34,8 @@ List<Users> userList = [
       userBirthMonth: 04,
       userBirthYear: 2023)
 ];
-String loggedName = userList[loggedIndex].name;
-String loggedSurname = userList[loggedIndex].surname;
-String loggedPass = userList[loggedIndex].userpass;
-String loggedUsername = userList[loggedIndex].username;
-int loggedUserBirthDay = userList[loggedIndex].userBirthDay;
-int loggedUserBirthMonth = userList[loggedIndex].userBirthMonth;
-int loggedUserBirthYear = userList[loggedIndex].userBirthYear;
-void login() {
+
+void loginUsername() {
   space();
   print("Istifadeci adiniz (username)");
   space();
@@ -50,51 +43,74 @@ void login() {
 }
 
 void usernameCheck() {
-  String username = stdin.readLineSync().toString();
+  String usernameInput = stdin.readLineSync().toString();
   for (int i = 0; i < userList.length; i++) {
-    if (username.isEmpty ||
-        username.startsWith(" ") ||
-        username.endsWith(" ") ||
-        username.contains(" ") ||
-        userList[i].username != username) {
-      space();
-      print("Istifadechi adinizi (username) duzgun qeyd edin");
-      space();
-      usernameCheck();
-    } else {
-      loggedIndex = i;
-      space();
-      print("Shifrenizi daxil edin");
-      space();
-      userpassCheck(username);
+    if (usernameInput == userList[i].username) {
+      logIn = i;
+      loginUserpass(usernameInput);
+      break;
     }
+  }
+
+    userList.forEach((element) {
+    if (element.username == usernameInput) {
+      logIn =
+          userList.indexWhere((element) => usernameInput == element.username);
+      print("LogIn = $logIn");
+      loginUserpass(usernameInput);
+    }
+  });
+
+  for (int i = 0; i < adminList.length; i++) {
+    if (usernameInput == adminList[i].adminUserName) {
+      admLogIn = i;
+      loginUserpass(usernameInput);
+      break;
+    }
+  }
+  if (logIn == -1 && admLogIn == -1) {
+    space();
+    print("Istifadechi adinizi (username) duzgun qeyd edin");
+    space();
+    usernameCheck();
   }
 }
 
-void userpassCheck(username) {
-  String userpass = stdin.readLineSync().toString();
+void loginUserpass(usernameInput) {
+  space();
+  print("Shifrenizi daxil edin");
+  space();
+  userpassCheck(usernameInput);
+}
+
+void userpassCheck(usernameInput) {
+  logIn = -1;
+  admLogIn = -1;
+  String userpassInput = stdin.readLineSync().toString();
   for (int i = 0; i < userList.length; i++) {
-    if (userpass.isEmpty ||
-        userpass.startsWith(" ") ||
-        userpass.endsWith(" ") ||
-        userpass.contains(" ") ||
-        userpass != userList[loggedIndex].userpass) {
-      space();
-      print("Shifrenizi duzgun daxil edin");
-      space();
-      userpassCheck(username);
-    } else {
+    if (userpassInput == userList[i].userpass &&
+        usernameInput == userList[i].username) {
+      logIn = i;
       userWelcome();
+      break;
     }
   }
+
   for (int i = 0; i < adminList.length; i++) {
-    if (adminList[i].adminUserName == username &&
-        adminList[i].adminPass == userpass) {
-      loggedAdminIndex = i;
+    if (userpassInput == adminList[i].adminPass &&
+        usernameInput == adminList[i].adminUserName) {
+      admLogIn = i;
       space();
       print(
-          "Hormetli ${adminList[i].adminName} ${adminList[i].adminSurname} xosh geldiniz!");
+          "Hormetli Admin ${adminList[i].adminName} ${adminList[i].adminSurname} xosh geldiniz!");
       space();
+      break;
     }
+  }
+  if (logIn == -1 && admLogIn == -1) {
+    space();
+    print("Shifrenizi duzgun daxil edin");
+    space();
+    userpassCheck(usernameInput);
   }
 }

@@ -1,19 +1,15 @@
 import 'dart:io';
-import 'dart:math';
-import 'products.dart';
 import 'registration.dart';
 import 'users.dart';
-import 'admins.dart';
 import 'guest_mod.dart';
-import 'user_panel.dart';
 
-int loggedUserIndex = -1;
 String newProductName = "";
 double newProductPrice = 0;
 int newProductCode = 0;
-String newProductInfo = "";
+
 RegExp azDetector = new RegExp(r'[^0-9]');
 RegExp numDetector = new RegExp(r'[^a-zA-Z]');
+
 void main() {
   space();
   print("[1] Qonaq rejimi");
@@ -30,10 +26,10 @@ void loginType() {
       guestMod();
       break;
     case 2:
-      login();
+      loginUsername();
       break;
     case 3:
-      reg1();
+      registration();
       break;
     default:
       print("Lutfen duzgun sechim edin");
