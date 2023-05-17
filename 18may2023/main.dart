@@ -14,9 +14,10 @@ String compChoice = "";
 
 void main() {
   print("Sechim edin");
-  print("[1] Paper");
-  print("[2] Scissors");
-  print("[3] Rock");
+  print("[1] Kagiz");
+  print("[2] Qaychi");
+  print("[3] Dash");
+  print("[4] Hesabi Sifirla");
   game();
 }
 
@@ -25,21 +26,28 @@ void game() {
   userChoice = stdin.readLineSync().toString();
   compChoice = (Random().nextInt(3) + 1).toString();
   print(" " * 3);
+  print("-" * 25);
   switch (userChoice) {
     case "1":
       userChoice = "Paper";
-      print("Sizin seciminiz [Paper]");
+      print("Sizin seciminiz [Kagiz]");
       gameStart();
       break;
     case "2":
       userChoice = "Scissors";
-      print("Sizin seciminiz [Scissors]");
+      print("Sizin seciminiz [Qaychi]");
       gameStart();
       break;
     case "3":
       userChoice = "Rock";
-      print("Sizin seciminiz [Rock]");
+      print("Sizin seciminiz [Dash]");
       gameStart();
+      break;
+    case "4":
+      userScore = 0;
+      compScore = 0;
+      print("Hesablar Sifirlandi");
+      main();
       break;
     default:
       print("Lutfen Duzgun Sechim edin");
@@ -49,17 +57,17 @@ void game() {
   switch (compChoice) {
     case "1":
       compChoice = "Paper";
-      print("Kompyuterin Secimi [Paper]");
+      print("Kompyuterin Secimi [Kagiz]");
       gameStart();
       break;
     case "2":
       compChoice = "Scissors";
-      print("Kompyuterin Secimi [Scissors]");
+      print("Kompyuterin Secimi [Qaychi]");
       gameStart();
       break;
     case "3":
       compChoice = "Rock";
-      print("Kompyuterin Secimi [Rock]");
+      print("Kompyuterin Secimi [Dash]");
       gameStart();
       break;
     default:
@@ -92,5 +100,6 @@ void result() {
   print(" " * 3);
   print("Umumi Hesab");
   print("Kompyuter [$compScore] -- [$userScore] Siz");
+  print("-" * 25);
   print(" " * 3);
 }
