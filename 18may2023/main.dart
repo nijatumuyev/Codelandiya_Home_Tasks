@@ -6,88 +6,64 @@ Map<String, String> conditions = {
   "Paper": "Rock",
   "Scissors": "Paper"
 };
-
+List<String> variants = ["Paper", "Scissors", "Rock"];
 int userScore = 0;
 int compScore = 0;
 String userChoice = "";
-String compChoice = "";
-
+String userVariant = "";
+String compVariant = "";
 void main() {
   print("Sechim edin");
   print("[1] Kagiz");
   print("[2] Qaychi");
   print("[3] Dash");
   print("[4] Hesabi Sifirla");
+  print("-" * 25);
+  selection();
+}
+
+void selection() {
+  print(" " * 3);
+  userChoice = stdin.readLineSync().toString();
+  compVariant = "${variants[Random().nextInt(3)]}";
+  print(" " * 3);
+  errorChecking();
+}
+
+void errorChecking() {
+  if (userChoice == "1" || userChoice == "2" || userChoice == "3") {
+    afterSelection();
+  } else if (userChoice == "4") {
+    clear();
+  } else {
+    print("Duzgun sechim edin");
+    selection();
+  }
+}
+
+void afterSelection() {
+  int userChoice2 = int.parse(userChoice);
+  userVariant = "${variants[userChoice2 - 1]}";
+  print("-" * 25);
+  print("Sizin seciminiz [$userVariant]");
+  print("Kompyuterin sechimi [$compVariant]");
   game();
 }
 
 void game() {
   print(" " * 3);
-  userChoice = stdin.readLineSync().toString();
-  compChoice = (Random().nextInt(3) + 1).toString();
-  print(" " * 3);
   print("-" * 25);
-  switch (userChoice) {
-    case "1":
-      userChoice = "Paper";
-      print("Sizin seciminiz [Kagiz]");
-      gameStart();
-      break;
-    case "2":
-      userChoice = "Scissors";
-      print("Sizin seciminiz [Qaychi]");
-      gameStart();
-      break;
-    case "3":
-      userChoice = "Rock";
-      print("Sizin seciminiz [Dash]");
-      gameStart();
-      break;
-    case "4":
-      userScore = 0;
-      compScore = 0;
-      print("Hesablar Sifirlandi");
-      main();
-      break;
-    default:
-      print("Lutfen Duzgun Sechim edin");
-      game();
-  }
-
-  switch (compChoice) {
-    case "1":
-      compChoice = "Paper";
-      print("Kompyuterin Secimi [Kagiz]");
-      gameStart();
-      break;
-    case "2":
-      compChoice = "Scissors";
-      print("Kompyuterin Secimi [Qaychi]");
-      gameStart();
-      break;
-    case "3":
-      compChoice = "Rock";
-      print("Kompyuterin Secimi [Dash]");
-      gameStart();
-      break;
-    default:
-      print("Lutfen Duzgun Sechim edin");
-      game();
-  }
-}
-
-void gameStart() {
   conditions.forEach((key, value) {
-    if (userChoice == compChoice) {
+    if (userVariant == compVariant) {
       print("Hec-Hece Qaldiniz");
       result();
       main();
-    } else if (userChoice == key && compChoice == value) {
+    } else if (userVariant == key && compVariant == value) {
       userScore++;
       print("Siz qalib geldiniz");
       result();
       main();
-    } else if (compChoice == key && userChoice == value) {
+    } else if (compVariant == key && userVariant == value) {
       compScore++;
       print("Kompyuter qalib geldi");
       result();
@@ -102,4 +78,13 @@ void result() {
   print("Kompyuter [$compScore] -- [$userScore] Siz");
   print("-" * 25);
   print(" " * 3);
+}
+
+void clear() {
+  userScore = 0;
+  compScore = 0;
+  print("-" * 25);
+  print("Hesablar Sifirlandi");
+  print("-" * 25);
+  main();
 }
