@@ -6,6 +6,7 @@ import 'payments.dart';
 import 'shopping_cart.dart';
 
 int productIndex = -1;
+int productIndexx = -1;
 double sum = 0;
 
 void userWelcome() {
@@ -45,11 +46,12 @@ void productChoicePanel() {
   space();
   print("Sizin sechdiyiniz mehsullar");
   for (int i = 0; i < cartList.length; i++) {
-    sum = sum + cartList[i].selectedProductPrice;
+    productIndexx = i;
+
     print(
         "[$i] ${cartList[i].selectedProductName}          ${cartList[i].selectedProductPrice}");
   }
-
+  sum = sum + cartList[productIndexx].selectedProductPrice;
   print("Cemi odenilecek mebleg ${sum.toStringAsFixed(2)} Azn");
   space();
   print("Alisverisi tamamlamaq uhun [1] daxil edin");
