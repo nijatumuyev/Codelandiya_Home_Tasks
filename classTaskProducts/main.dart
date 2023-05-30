@@ -16,9 +16,9 @@ void main() {
 
 Map<String, int> counting(List<String> list) {
   Map<String, int> newProducts = {};
-  for (var element in list) {
+  for (String element in list) {
     String productName = element.toLowerCase();
-    newProducts.keys.contains(productName)
+    newProducts.containsKey(productName)
         ? newProducts[productName] = newProducts[productName]! + 1
         : newProducts[productName] = 1;
   }
