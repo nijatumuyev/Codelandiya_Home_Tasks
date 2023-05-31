@@ -52,15 +52,6 @@ void usernameCheck() {
     }
   }
 
-    userList.forEach((element) {
-    if (element.username == usernameInput) {
-      logIn =
-          userList.indexWhere((element) => usernameInput == element.username);
-      print("LogIn = $logIn");
-      loginUserpass(usernameInput);
-    }
-  });
-
   for (int i = 0; i < adminList.length; i++) {
     if (usernameInput == adminList[i].adminUserName) {
       admLogIn = i;

@@ -49,7 +49,7 @@ void productChoicePanel() {
     productIndexx = i;
 
     print(
-        "[$i] ${cartList[i].selectedProductName}          ${cartList[i].selectedProductPrice}");
+        "[$i+1] ${cartList[i].selectedProductName}          ${cartList[i].selectedProductPrice}");
   }
   sum = sum + cartList[productIndexx].selectedProductPrice;
   print("Cemi odenilecek mebleg ${sum.toStringAsFixed(2)} Azn");
