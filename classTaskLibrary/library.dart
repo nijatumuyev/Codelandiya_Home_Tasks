@@ -80,6 +80,7 @@ class Library {
         searchByTitle();
         break;
       case 2:
+        searchByAuthor();
         break;
       case 3:
         break;
@@ -99,6 +100,40 @@ class Library {
 
     for (int i = 0; i < books.length; i++) {
       if (books[i].title.toLowerCase().contains(searchTitle)) {
+        int countAuthor = 0;
+        int countTitle = 0;
+        int countGenre = 0;
+        if (books[i].author.length < 16) {
+          countAuthor = 16 - books[i].author.length;
+          books[i].author = (books[i].author) + (" " * countAuthor);
+        }
+        if (books[i].title.length < 25) {
+          countTitle = 25 - books[i].title.length;
+          books[i].title = (books[i].title) + (" " * countTitle);
+        }
+        if (books[i].genre.length < 10) {
+          countGenre = 10 - books[i].genre.length;
+          books[i].genre = (books[i].genre) + (" " * countGenre);
+        }
+        space();
+        print(
+            "Muellif                   Kitabin Adi            Yayim Tarixi        Janr       Qiymeti (AZN)");
+        space();
+        print(
+            "${books[i].author}     ${books[i].title}       ${books[i].year}           ${books[i].genre}      ${books[i].price}");
+      }
+    }
+  }
+
+  void searchByAuthor() {
+    space();
+    print("Yazarin adini daxil edin");
+    space();
+    String searchAuthor = stdin.readLineSync().toString().toLowerCase();
+    space();
+
+    for (int i = 0; i < books.length; i++) {
+      if (books[i].author.toLowerCase().contains(searchAuthor)) {
         int countAuthor = 0;
         int countTitle = 0;
         int countGenre = 0;
