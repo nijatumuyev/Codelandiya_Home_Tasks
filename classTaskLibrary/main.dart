@@ -1,6 +1,4 @@
 import 'dart:io';
-
-import 'book.dart';
 import 'library.dart';
 
 Library allBooks = Library();
@@ -30,6 +28,7 @@ void main() {
       main();
       break;
     default:
+      print("Duzgun Sechim Edin");
   }
 }
 
