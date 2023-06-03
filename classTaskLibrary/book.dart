@@ -7,11 +7,11 @@ Map<int, String> genres = {
 };
 
 class Book {
-  late String title;
-  late String author;
-  late int year;
-  late String genre;
-  late double price;
+  String title;
+  String author;
+  int year;
+  String genre;
+  double price;
 
   Book(
       {required this.title,

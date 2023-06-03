@@ -59,8 +59,11 @@ class Library {
     space();
     int addYear = int.parse(stdin.readLineSync().toString());
     space();
-    print("Janr");
+    print("Janr Sechin");
     space();
+    genres.forEach((key, value) {
+      print("[$key] $value");
+    });
     String addGenre = stdin.readLineSync().toString();
     space();
     print("Qiymet");
