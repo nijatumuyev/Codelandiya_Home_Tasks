@@ -1,6 +1,7 @@
 import 'book.dart';
 import 'dart:io';
 import 'main.dart';
+import 'search_any.dart';
 
 late int countAuthor;
 late int countGenre;
@@ -87,6 +88,7 @@ class Library {
     print("[3] Janrlara Gore");
     print("[4] Yayim Tarixine Gore");
     print("[5] Qiymet Araligina Gore");
+    print("[6] Butun Kriteriyalar Uzre (Genishlendirilmish)");
     space();
     int? chooseSearch = int.tryParse(stdin.readLineSync().toString());
     space();
@@ -108,6 +110,9 @@ class Library {
         break;
       case 5:
         searchByPrice(0);
+        break;
+        case 6:
+        searchForAny(0);
         break;
       default:
         print("Duzgun Sechim Edin");
