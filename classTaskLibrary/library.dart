@@ -213,31 +213,31 @@ class Library {
     print("Minimal meblegi daxil edin (Mes: 8)");
     print("Bosh buraxmaq ucun Enter daxil edin");
     space();
-    double? minPrice = double.tryParse(stdin.readLineSync().toString());
+    double? priceFrom = double.tryParse(stdin.readLineSync().toString());
     space();
-    if (minPrice == null) {
-      minPrice = 0;
+    if (priceFrom == null) {
+      priceFrom = 0;
     }
     print("Maksimal meblegi daxil edin (Mes: 55)");
     print("Bosh buraxmaq ucun Enter daxil edin");
     space();
-    double? maxPrice = double.tryParse(stdin.readLineSync().toString());
-    if (maxPrice == null) {
-      maxPrice = books.last.price;
+    double? priceTo = double.tryParse(stdin.readLineSync().toString());
+    if (priceTo == null) {
+      priceTo = books.last.price;
     }
-    if (minPrice > maxPrice) {
-      minPrice = minPrice + maxPrice;
-      maxPrice = minPrice - maxPrice;
-      minPrice = minPrice - maxPrice;
+    if (priceFrom > priceTo) {
+      priceFrom = priceFrom + priceTo;
+      priceTo = priceFrom - priceTo;
+      priceFrom = priceFrom - priceTo;
     }
     space();
     for (int i = 0; i < books.length; i++) {
-      if (minPrice <= books[i].price && books[i].price <= maxPrice) {
+      if (priceFrom <= books[i].price && books[i].price <= priceTo) {
         index++;
         listPrinting(index, i);
       }
     }
-    if (minPrice > books.last.price || maxPrice < books.first.price) {
+    if (priceFrom > books.last.price || priceTo < books.first.price) {
       print("Secdiyiniz araliqda kitab movcud deyil");
       print("Yeniden axtarish edin");
       space();
