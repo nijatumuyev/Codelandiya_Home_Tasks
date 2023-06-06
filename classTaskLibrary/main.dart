@@ -4,16 +4,16 @@ import 'library.dart';
 Library allBooks = Library();
 
 void main() {
+  allBooks.sorting();
   space();
   print("[1] Butun kitablari Goster");
   print("[2] Kitab axtar");
   print("[3] Kitab elave et");
   space();
   int? choose = int.tryParse(stdin.readLineSync().toString());
-  space();
   switch (choose) {
     case 1:
-      allBooks.displayBooks();
+      allBooks.displayBooks(0);
       main();
       break;
     case 2:
@@ -26,6 +26,7 @@ void main() {
       break;
     default:
       print("Duzgun Sechim Edin");
+      main();
   }
 }
 

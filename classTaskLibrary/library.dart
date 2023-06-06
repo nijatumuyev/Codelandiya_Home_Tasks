@@ -2,10 +2,9 @@ import 'book.dart';
 import 'dart:io';
 import 'main.dart';
 
-int countForPrint = 1;
-int countAuthor = 0;
-int countTitle = 0;
-int countGenre = 0;
+late int countAuthor;
+late int countGenre;
+late int countTitle;
 
 class Library {
   List<Book> books = [
@@ -35,13 +34,13 @@ class Library {
         price: 6.99),
   ];
 
-  void displayBooks() {
-    books.sort((a, b) => a.author.length.compareTo(b.author.length));
+  void displayBooks(int index) {
     space();
     print("Kitabxanada Ashagidaki Kitablar Movcuddur");
+    space();
     for (int i = 0; i < books.length; i++) {
-      countForPrintDef(0, i);
-      listPrinting(i);
+      index++;
+      listPrinting(index, i);
     }
   }
 
@@ -64,23 +63,24 @@ class Library {
     genres.forEach((key, value) {
       print("[$key] $value");
     });
-    String addGenre = stdin.readLineSync().toString();
+    space();
+    int? addGenre = int.tryParse(stdin.readLineSync().toString());
     space();
     print("Qiymet");
     space();
     double addPrice = double.parse(stdin.readLineSync().toString());
-
+    space();
+    print("Kitab Ugurla Elave Olundu");
     Book addNewBook = Book(
         title: addTitle,
         author: addAuthor,
         year: addYear,
-        genre: addGenre,
+        genre: genres[addGenre]!,
         price: addPrice);
     books.add(addNewBook);
   }
 
   void search() {
-    countForPrint = 1;
     space();
     print("[1] Kitabin Adina Gore");
     print("[2] Muellifin Adina Gore");
@@ -92,58 +92,66 @@ class Library {
     space();
     switch (chooseSearch) {
       case 1:
-        searchByTitle();
+        searchByTitle(0);
         break;
       case 2:
-        searchByAuthor();
+        searchByAuthor(0);
         break;
       case 3:
         space();
         print("Axatris etmek istediyiniz Janri sechin");
         space();
-        searchByGenres();
+        searchByGenres(0);
         break;
       case 4:
-        searchByYear();
+        searchByYear(0);
         break;
       case 5:
-        searchByPrice();
+        searchByPrice(0);
         break;
       default:
         print("Duzgun Sechim Edin");
+        search();
     }
   }
 
-  void searchByTitle() {
-    space();
+  void searchByTitle(int index) {
     print("Kitab adini daxil edin");
     space();
-    String searchTitle = stdin.readLineSync().toString().toLowerCase();
-
+    String searchTitleKey = stdin.readLineSync().toString().toLowerCase();
+    space();
     for (int i = 0; i < books.length; i++) {
-      if (books[i].title.toLowerCase().contains(searchTitle)) {
-        countForPrintDef(0, i);
-        listPrinting(i);
+      if (books[i].title.toLowerCase().contains(searchTitleKey)) {
+        index++;
+        listPrinting(index, i);
       }
+    }
+    if (index == 0) {
+      print("Axtarish uzre hec bir netice tapilmadi");
+      print("Yeniden cehd edin");
+      searchByTitle(0);
     }
   }
 
-  void searchByAuthor() {
-    space();
+  void searchByAuthor(int index) {
     print("Yazarin adini daxil edin");
     space();
-    String searchAuthor = stdin.readLineSync().toString().toLowerCase();
+    String searchAuthorKey = stdin.readLineSync().toString().toLowerCase();
     space();
     for (int i = 0; i < books.length; i++) {
-      if (books[i].author.toLowerCase().contains(searchAuthor)) {
-        countForPrintDef(0, i);
-        listPrinting(i);
+      if (books[i].author.toLowerCase().contains(searchAuthorKey)) {
+        index++;
+        listPrinting(index, i);
       }
+    }
+    if (index == 0) {
+      print("Axtarish uzre hec bir netice tapilmadi");
+      print("Yeniden cehd edin");
+      searchByAuthor(0);
     }
   }
 
-  void searchByGenres() {
-    int z = 0;
+  void searchByGenres(int index) {
     genres.forEach((key, value) {
       print("[$key] $value");
     });
@@ -153,93 +161,54 @@ class Library {
     if (genres.containsKey(searchGenreKey)) {
       for (int i = 0; i < books.length; i++) {
         if (books[i].genre == genres[searchGenreKey]) {
-          countForPrintDef(0, i);
-          listPrinting(i);
-          z = 1;
+          index++;
+          listPrinting(index, i);
         }
       }
-      if (z == 0) {
+      if (index == 0) {
         print("Bu Janr uzre kitab movcud deyil.");
         space();
-        searchByGenres();
+        searchByGenres(0);
       }
     } else {
       print("Duzgun sechim edin");
       space();
-      searchByGenres();
+      searchByGenres(0);
     }
   }
 
-  searchByYear() {
+  void searchByYear(int index) {
     books.sort((a, b) => a.year.compareTo(b.year));
     print("Hansi ilden ? (Max 4 simvol) (Mes: 1935)");
     print("Bosh buraxmaq ucun Enter daxil edin");
     space();
-    int? endYear = null;
-    int? beginYear = int.tryParse(stdin.readLineSync().toString());
-    if (beginYear == null) {
-      beginYear = books.first.year;
-      print("Hansi iledek ? (Max 4 simvol) (Mes: 2018)");
-      print("Bosh buraxmaq ucun Enter daxil edin");
+    int? yearFrom = int.tryParse(stdin.readLineSync().toString());
+    yearFrom != null ? space() : yearFrom = books.first.year;
+    print("Hansi iledek ? (Max 4 simvol) (Mes: 2018)");
+    print("Bosh buraxmaq ucun Enter daxil edin");
+    space();
+    int? yearTo = int.tryParse(stdin.readLineSync().toString());
+    yearTo != null ? space() : yearTo = books.last.year;
+    if (yearFrom > yearTo) {
+      yearFrom = yearFrom + yearTo;
+      yearTo = yearFrom - yearTo;
+      yearFrom = yearFrom - yearTo;
+    }
+    if (yearFrom > books.last.year || yearTo < books.first.year) {
+      print("Sechdiyiniz araliqda kitab movcud deyil");
+      print("Yeniden axtarish edin");
       space();
-      endYear = int.tryParse(stdin.readLineSync().toString());
-      if (endYear == null) {
-        endYear = DateTime.now().year;
-        print("Her ikisi de bosh ola bilmez");
-        print("Yeniden axtarish edin");
-        space();
-        searchByYear();
-      } else if (beginYear > books.last.year || endYear < books.first.year) {
-        space();
-        print("Secdiyiniz muddet araliginda hech bir kitab yoxdur");
-        print("Yeniden axtarish edin");
-        space();
-        searchByYear();
-      } else if ((beginYear <= books.last.year && endYear <= books.last.year) ||
-          (beginYear <= books.last.year && endYear >= books.last.year)) {
-        space();
-        for (int i = 0; i < books.length; i++) {
-          if (beginYear <= books[i].year && books[i].year <= endYear) {
-            countForPrintDef(0, i);
-            listPrinting(i);
-          }
-        }
-      }
-    } else {
-      print("Hansi iledek ? (Max 4 simvol) (Mes: 2018)");
-      print("Bosh buraxmaq ucun Enter daxil edin");
-      space();
-      endYear = int.tryParse(stdin.readLineSync().toString());
-      if (beginYear > books.last.year ||
-          (beginYear < books.first.year && endYear! < books.first.year)) {
-        space();
-        print("Secdiyiniz muddet araliginda hech bir kitab yoxdur");
-        print("Yeniden axtarish edin");
-        space();
-        searchByYear();
-      } else if (endYear == null) {
-        endYear = DateTime.now().year;
-        for (int i = 0; i < books.length; i++) {
-          if (beginYear <= books[i].year && books[i].year <= endYear) {
-            countForPrintDef(0, i);
-            listPrinting(i);
-          }
-        }
-      } else if ((beginYear <= books.first.year &&
-              endYear <= books.last.year) ||
-          (beginYear <= books.first.year && endYear >= books.last.year)) {
-        for (int i = 0; i < books.length; i++) {
-          if (beginYear <= books[i].year && books[i].year <= endYear) {
-            countForPrintDef(0, i);
-            listPrinting(i);
-          }
-        }
+      searchByYear(0);
+    }
+    for (int i = 0; i < books.length; i++) {
+      if (books[i].year >= yearFrom && books[i].year <= yearTo) {
+        index++;
+        listPrinting(index, i);
       }
     }
   }
 
-  void searchByPrice() {
-    int priceTest = 1;
+  void searchByPrice(int index) {
     books.sort((a, b) => a.price.compareTo(b.price));
     print("Minimal meblegi daxil edin (Mes: 8)");
     print("Bosh buraxmaq ucun Enter daxil edin");
@@ -249,7 +218,6 @@ class Library {
     if (minPrice == null) {
       minPrice = 0;
     }
-
     print("Maksimal meblegi daxil edin (Mes: 55)");
     print("Bosh buraxmaq ucun Enter daxil edin");
     space();
@@ -257,48 +225,56 @@ class Library {
     if (maxPrice == null) {
       maxPrice = books.last.price;
     }
-
+    if (minPrice > maxPrice) {
+      minPrice = minPrice + maxPrice;
+      maxPrice = minPrice - maxPrice;
+      minPrice = minPrice - maxPrice;
+    }
+    space();
     for (int i = 0; i < books.length; i++) {
       if (minPrice <= books[i].price && books[i].price <= maxPrice) {
-        countForPrintDef(0, i);
-        listPrinting(i);
-        priceTest = 1;
+        index++;
+        listPrinting(index, i);
       }
     }
-    if (priceTest != 1) {
-      space();
-      print("Secdiyiniz qiymet araliginda hech bir kitab yoxdur");
+    if (minPrice > books.last.price || maxPrice < books.first.price) {
+      print("Secdiyiniz araliqda kitab movcud deyil");
       print("Yeniden axtarish edin");
       space();
-      searchByYear();
+      searchByPrice(0);
     }
   }
 
-  void countForPrintDef(int a, int b) {
-    if (a == 0 && b == 0) {
-      space();
+  void listPrinting(int index, int i) {
+    if (index == 1) {
       print(
           "Muellif                   Kitabin Adi            Yayim Tarixi        Janr       Qiymet (AZN)");
       space();
-      a++;
     }
-  }
-
-  void listPrinting(int i) {
-    if (books[i].author.length < 16) {
-      countAuthor = 16 - books[i].author.length;
-      books[i].author = (books[i].author) + (" " * countAuthor);
+    if (books[i].author.length < countAuthor) {
+      books[i].author =
+          (books[i].author) + (" " * (countAuthor - books[i].author.length));
     }
-    if (books[i].title.length < 25) {
-      countTitle = 25 - books[i].title.length;
-      books[i].title = (books[i].title) + (" " * countTitle);
+    if (books[i].title.length < countTitle) {
+      books[i].title =
+          (books[i].title) + (" " * (countTitle - books[i].title.length));
     }
-    if (books[i].genre.length < 10) {
-      countGenre = 10 - books[i].genre.length;
-      books[i].genre = (books[i].genre) + (" " * countGenre);
+    if (books[i].genre.length < countGenre) {
+      books[i].genre =
+          (books[i].genre) + (" " * (countGenre - books[i].genre.length));
     }
     print(
         "${books[i].author}     ${books[i].title}       ${books[i].year}          ${books[i].genre}      ${books[i].price}");
     books[i].genre = (books[i].genre).split(" ").toList().join();
+  }
+
+  void sorting() {
+    books.sort((a, b) => a.author.length.compareTo(b.author.length));
+    countAuthor = books.last.author.length;
+    books.sort((a, b) => a.title.length.compareTo(b.title.length));
+    countTitle = books.last.title.length;
+    books.sort((a, b) => a.genre.length.compareTo(b.genre.length));
+    countGenre = books.last.genre.length;
+    books.sort((a, b) => a.author.length.compareTo(b.author.length));
   }
 }
