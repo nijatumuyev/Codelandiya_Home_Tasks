@@ -31,6 +31,6 @@ void main() {
   print("-" * 20);
   print(" " * 10);
   vehicleTwo.display();
-  print("How many students per day: ${vehicleTwo.studentsPerDay(2, 3)}");
+  print("Passengers per day: ${vehicleTwo.passengersPerDay(2, 3)}");
   print(" " * 10);
 }

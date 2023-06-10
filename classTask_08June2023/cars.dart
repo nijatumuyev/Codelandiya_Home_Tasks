@@ -71,6 +71,6 @@ class Bus extends Vehicles {
     print("Bus Type: $busType\nLong Distance Use: $isLongDistance");
   }
 
-  int studentsPerDay(int shiftCount, int multipleCount) =>
-      multipleCount * shiftCount * 18;
+  int passengersPerDay(int shiftCount, int multipleCount) =>
+      multipleCount * shiftCount * super.passengers;
 }
