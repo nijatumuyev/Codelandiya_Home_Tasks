@@ -17,7 +17,7 @@ class Playlist extends MediaFile with Shuffleable {
 
   showPlaylist() {
     mediaFiles.forEach((element) {
-      element.title;
+      print("${element.title}");
     });
   }
 }
