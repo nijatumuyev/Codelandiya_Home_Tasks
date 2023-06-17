@@ -6,11 +6,10 @@ void main() {
       passengerCapacity: 5,
       brand: "Toyota",
       model: "Supra",
-      type: [VehicleType.Coupe],
-      price: 200);
+      type: [VehicleType.Coupe]);
   print(" " * 10);
   vehicle1.rent();
-  vehicle1.calculateDiscountedPrice(25);
+  vehicle1.calculateDiscountedPrice(200);
   vehicle1.rent();
   print(" " * 10);
 }
