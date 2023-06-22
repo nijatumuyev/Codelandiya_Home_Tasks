@@ -23,6 +23,5 @@ void main(List<String> args) {
       timestamp: "${DateTime.now()}"));
   print(" " * 10);
   print("You Have ${myApp.countOfTotalMessages()} new messages");
-  print("  " * 10);
   myApp.showMessages();
 }

@@ -16,6 +16,7 @@ class ChatApp<T extends Message> {
   void showMessages() {
     for (Message message in messages) {
       print(" " * 10);
+      print("*" * 30);
       print("Sender: ${messages.first.sender}");
       print("Recipiend: ${messages.first.recipiend}");
       print("Time: ${messages.first.timestamp}");
