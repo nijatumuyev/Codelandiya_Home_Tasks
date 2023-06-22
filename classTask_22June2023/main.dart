@@ -24,5 +24,5 @@ void main(List<String> args) {
   print(" " * 10);
   print("You Have ${myApp.countOfTotalMessages()} new messages");
   print("  " * 10);
-  myApp.infoMessage();
+  myApp.showMessages();
 }
