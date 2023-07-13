@@ -33,10 +33,10 @@ class ThreadsUiClone extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(left: 28),
+                    padding: EdgeInsets.only(left: 17),
                     child: Icon(
                       Icons.arrow_back,
-                      size: 40,
+                      size: 35,
                       color: Colors.black,
                     ),
                   ),
@@ -48,14 +48,12 @@ class ThreadsUiClone extends StatelessWidget {
                           padding: const EdgeInsets.only(right: 28),
                           child: Image.network(
                             "https://w7.pngwing.com/pngs/31/164/png-transparent-instagram-vector-brand-logos-icon.png",
-                            width: 50,
-                            height: 50,
+                            width: 45,
                           ),
                         ),
                         Image.network(
                           "https://w7.pngwing.com/pngs/860/1022/png-transparent-computer-icons-button-menu-symbol-button-smiley-black-emoticon-thumbnail.png",
-                          width: 33,
-                          height: 33,
+                          width: 29,
                         ),
                       ],
                     ),
@@ -64,11 +62,10 @@ class ThreadsUiClone extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(left: 20, right: 20, top: 25),
+              padding: EdgeInsets.only(left: 14, right: 14, top: 25),
               child: SizedBox(
-                // width: MediaQuery.of(context).size.width,
-
                 child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(
                       child: Column(
@@ -76,13 +73,13 @@ class ThreadsUiClone extends StatelessWidget {
                           CircleAvatar(
                             backgroundImage: NetworkImage(
                                 "https://yourwikis.com/wp-content/uploads/2020/01/mark-zuck-img.jpg"),
-                            radius: 30,
+                            radius: 22,
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(top: 13, bottom: 13),
+                            padding: const EdgeInsets.only(top: 13),
                             child: Container(
                               height: 110,
-                              width: 3,
+                              width: 2,
                               color: Colors.amber[500],
                             ),
                           ),
@@ -96,20 +93,20 @@ class ThreadsUiClone extends StatelessWidget {
                                     child: CircleAvatar(
                                       backgroundImage: NetworkImage(
                                           "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8bWVufGVufDB8fDB8fHww&w=1000&q=80"),
-                                      radius: 12,
+                                      radius: 9,
                                     ),
                                   ),
                                   CircleAvatar(
                                     backgroundImage: NetworkImage(
                                         "https://images.everydayhealth.com/images/mens-health/6-skincare-tips-men-should-always-follow-peter-kraus-00-722x406.jpg"),
-                                    radius: 16,
+                                    radius: 11,
                                   ),
                                 ],
                               ),
                               CircleAvatar(
                                 backgroundImage: NetworkImage(
                                     "https://www.man-shop.eu/media/image/19/07/c7/HerrenBz6datKT7kMmG.png"),
-                                radius: 9,
+                                radius: 6,
                               ),
                             ],
                           ),
@@ -117,37 +114,38 @@ class ThreadsUiClone extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      // width: MediaQuery.of(context).size.width,
                       child: Padding(
-                        padding: const EdgeInsets.only(left: 15, right: 5),
+                        padding: const EdgeInsets.only(left: 10, right: 5),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             SizedBox(
                               child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  SizedBox(
-                                    child: Row(
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(right: 5),
-                                          child: Text(
-                                            "zuck",
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 20),
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 213),
+                                    child: SizedBox(
+                                      child: Row(
+                                        children: [
+                                          Padding(
+                                            padding:
+                                                const EdgeInsets.only(right: 5),
+                                            child: Text(
+                                              "zuck",
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 16),
+                                            ),
                                           ),
-                                        ),
-                                        Icon(
-                                          Icons.verified,
-                                          color: Colors.blue[700],
-                                          size: 22,
-                                        ),
-                                      ],
+                                          Icon(
+                                            Icons.verified,
+                                            color: Colors.blue[700],
+                                            size: 18,
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                   SizedBox(
@@ -159,7 +157,7 @@ class ThreadsUiClone extends StatelessWidget {
                                           child: Text(
                                             "1d",
                                             style: TextStyle(
-                                                fontSize: 23,
+                                                fontSize: 16,
                                                 color: Colors.grey,
                                                 fontWeight: FontWeight.w500),
                                           ),
@@ -174,15 +172,42 @@ class ThreadsUiClone extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsets.only(top: 7, bottom: 7),
                               child: SizedBox(
-                                child: Row(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      "Threads reached 100 million sign ups over the\n weekend."
-                                      "That's mostly organic demand and we\n haven't even turned "
-                                      "on many promotions yet.\n Can't believe it's only been 5 days!",
+                                      "Threads reached 100 million sign ups over the",
                                       style: TextStyle(
                                         fontWeight: FontWeight.w700,
-                                        fontSize: 13,
+                                        fontSize: 15,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 5, bottom: 5),
+                                      child: Text(
+                                        "weekend. That's mostly organic demand and we",
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w700,
+                                          fontSize: 15,
+                                        ),
+                                      ),
+                                    ),
+                                    Text(
+                                      "haven't even turned on many promotions yet.",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 15,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 5),
+                                      child: Text(
+                                        "Can't believe it's only been 5 days!",
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w700,
+                                          fontSize: 15,
+                                        ),
                                       ),
                                     ),
                                   ],
@@ -190,33 +215,46 @@ class ThreadsUiClone extends StatelessWidget {
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(bottom: 7),
+                              padding: const EdgeInsets.only(top: 0),
                               child: SizedBox(
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     Padding(
                                       padding: const EdgeInsets.only(right: 8),
-                                      child: Icon(Icons.heart_broken),
+                                      child: Image.network(
+                                        "https://icon-library.com/images/instagram-heart-icon/instagram-heart-icon-17.jpg",
+                                        width: 26,
+                                      ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.only(right: 8),
-                                      child: Icon(Icons.comment),
+                                      padding: const EdgeInsets.only(right: 0),
+                                      child: Image.network(
+                                        "https://icon-library.com/images/instagram-comment-bubble-icon/instagram-comment-bubble-icon-13.jpg",
+                                        width: 43,
+                                      ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.only(right: 8),
-                                      child: Icon(Icons.share),
+                                      padding: const EdgeInsets.only(right: 0),
+                                      child: Image.network(
+                                        "https://thenounproject.com/api/private/icons/2679046/edit/?backgroundShape=SQUARE&backgroundShapeColor=%23000000&backgroundShapeOpacity=0&exportSize=752&flipX=false&flipY=false&foregroundColor=%23000000&foregroundOpacity=1&imageFormat=png&rotation=0",
+                                        width: 47,
+                                      ),
                                     ),
-                                    Icon(Icons.send),
+                                    Image.network(
+                                      "https://icon-library.com/images/send-icon/send-icon-18.jpg",
+                                      width: 32,
+                                    ),
                                   ],
                                 ),
                               ),
                             ),
-                            SizedBox(
+                            Padding(
+                              padding: const EdgeInsets.only(top: 10),
                               child: Text(
                                 "19,884 replies ․ 109K likes",
                                 style: TextStyle(
-                                  fontSize: 16,
+                                  fontSize: 17,
                                 ),
                               ),
                             ),
@@ -244,7 +282,7 @@ class ThreadsUiClone extends StatelessWidget {
             BottomNavigationBarItem(
                 icon: Icon(
                   Icons.search_sharp,
-                  color: Colors.black,
+                  color: Colors.grey,
                 ),
                 label: ""),
             BottomNavigationBarItem(
@@ -254,9 +292,9 @@ class ThreadsUiClone extends StatelessWidget {
                 ),
                 label: " "),
             BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.heart_broken,
-                  color: Colors.grey,
+                icon: Image.network(
+                  "https://icon-library.com/images/instagram-heart-icon/instagram-heart-icon-17.jpg",
+                  width: 36,
                 ),
                 label: " "),
             BottomNavigationBarItem(
